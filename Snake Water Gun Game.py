@@ -1,69 +1,59 @@
-# Project = 1
-# Snake Water Gun Game 
-def snake_water_gun_game():
-    import random
+# Snake Water Gun
+import random
 
+manPoint = 0
+compPoint = 0
+noofChances = 0
+Tie = 0
 
-    print("Computor's Turn : Snake(s) , Water(w) , Gun(g)")
-    RandomNumber = random.randint(1 , 3)
-    if RandomNumber == 1:
-        ComputersChoice = "s"
-    elif RandomNumber == 2:
-        ComputersChoice = "w"
+for noofChances in range(10):
+
+    # Input Section
+    lst = ["Snake" , "Water" , "Gun"]
+    comp = random.choice(lst)
+    man = input("Please Enter s = Snake , w = Water , g = Gun : ")
+    if man == "s":
+        man = "Snake"
+    elif man == "w":
+        man = "Water"
     else:
-        ComputersChoice = "g" 
-
-
-    UsersChoice = input("Your Turn : Snake(s) , Water(w) , Gun(g)\n:>")
-
-
-
-    def GameWinner(ComputersChoice,UsersChoice):
-        if ComputersChoice == "s":
-            if UsersChoice == "w":
-                return False
-            elif UsersChoice == "s":
+        man = "Gun"
+    
+    # Primary Result Chossing Section
+    def gameResult(comp , man):
+        if man == "Snake":
+            if comp == "Snake":
                 return None
-            elif UsersChoice == "g":
+            elif comp == "Water":
                 return True
-        elif ComputersChoice == "w":
-            if UsersChoice == "g":
+            else:
                 return False
-            elif UsersChoice == "w":
-                return None
-            elif UsersChoice == "s":
+        elif man == "Water":
+            if comp == "Water":
+                return None 
+            else:
                 return True
         else:
-            if UsersChoice == "s":
-                return False
-            elif UsersChoice == "g":
-                return None
-            elif UsersChoice == "w":
-                return True
+            return None
 
+    Result = gameResult(comp , man)
 
+    # Point Section
+ 
+    if Result == True:
+        manPoint+=1
+        print(f"Computer = {comp} , You = {man} \nSo You Win \n")
+    elif Result == False:
+        compPoint+=1
+        print(f"Computer = {comp} , You = {man} \nSo You Loss \n")
+    else:
+        Tie+=1
+        print(f"Computer = {comp} , You = {man} \nSo This Chance was Tie \n")
 
-    print(f"Your Choice = {UsersChoice}")
-    print(f"Computer's Choice =  {ComputersChoice}")
-
-
-
-
-    a = GameWinner(ComputersChoice,UsersChoice)
-    if a:
-        print("Congratulations! You Won The Match")
-    elif a == None:
-        print("Tie! Your and Computer's Choices are Same")
-    elif a == False:
-        print("Sorry! You Loss The Match")
-    print()
-    print()
-    print()
-    print()
-    print()
-    print("Thanks For Playing Games on Praddyumn Gaming Studio")
-    a = int(input("Do You Want to Play This Game Again 0 = No and 1 = Yes: "))
-    if a==1:
-        snake_water_gun_game()
-
-snake_water_gun_game()
+# Final Result Section
+if manPoint>=compPoint:
+    print(f"Computers point = {compPoint} , Tie = {Tie} and Your Point = {manPoint} \n********* So You are Winner of This Match *********")
+elif compPoint>=manPoint:
+    print(f"Computers point = {compPoint} , Tie = {Tie} and Your Point = {manPoint} \n********* So Computer are Winner of This Match *********")
+elif manPoint==compPoint:
+    print(f"Computers point = {compPoint} , Tie = {Tie} and Your Point = {manPoint} \n********* So This Match Was Tie *********")
